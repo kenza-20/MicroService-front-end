@@ -1,0 +1,26 @@
+<div class="container mt-4">
+    <h2>Liste des Offres d’Emploi</h2>
+    <button class="btn btn-primary mb-3" routerLink="/create">Créer une offre</button>
+    <table class="table table-bordered">
+      <thead class="table-dark">
+        <tr>
+          <th>Titre</th>
+          <th>Description</th>
+          <th>Statut</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let job of jobOffers">
+          <td>{{ job.title }}</td>
+          <td>{{ job.description }}</td>
+          <td>{{ job.status }}</td>
+          <td>
+            <button class="btn btn-warning me-2" (click)="editJobOffer(job.id)">Modifier</button>
+            <button class="btn btn-danger" (click)="deleteJobOffer(job.id)">Supprimer</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
