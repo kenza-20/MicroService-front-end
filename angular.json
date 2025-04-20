@@ -23,7 +23,6 @@
             "outputPath": "dist/micro-template",
             "index": "src/index.html",
             "main": "src/main.ts",
-            "proxyConfig": "src/proxy.conf.json",
             "allowedCommonJsDependencies": ["chart.js"],
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
