@@ -1,0 +1,84 @@
+import { NgModule } from "@angular/core";
+import { Routes, RouterModule } from "@angular/router";
+
+// layouts
+import { AdminComponent } from "./layouts/admin/admin.component";
+import { AuthComponent } from "./layouts/auth/auth.component";
+
+// admin views
+import { DashboardComponent } from "./views/admin/dashboard/dashboard.component";
+import { MapsComponent } from "./views/admin/maps/maps.component";
+import { SettingsComponent } from "./views/admin/settings/settings.component";
+import { TablesComponent } from "./views/admin/tables/tables.component";
+import { JobOffersComponent } from "./views/job-offers/job-offers.component";
+import { AdminJobOffersComponent } from "./views/admin-job-offers/admin-job-offers.component";
+import { JobOffersWrapperComponent } from './views/job-offers-wrapper/job-offers-wrapper.component';
+
+// auth views
+import { LoginComponent } from "./views/auth/login/login.component";
+import { RegisterComponent } from "./views/auth/register/register.component";
+
+// no layout views
+import { IndexComponent } from "./views/index/index.component";
+import { LandingComponent } from "./views/landing/landing.component";
+import { ProfileComponent } from "./views/profile/profile.component";
+// maram leave views
+import { LeaveComponent } from "./layouts/leave/leave.component";
+import { LeaveRequestComponent } from "./views/leave/request/leave-request.component";
+import { LeaveRHComponent } from "./views/leave/rh/leave-rh.component";
+import { EmployesComponent } from "./views/admin/employes/employes.component";
+
+const role = localStorage.getItem('user_role') || 'USER';
+
+const routes: Routes = [
+  {
+    path: 'admin',
+    component: AdminComponent,
+    children: [
+      { path: 'dashboard', component: DashboardComponent },
+      { path: 'settings', component: SettingsComponent },
+      { path: 'tables', component: TablesComponent },
+      { path: 'maps', component: MapsComponent },
+      { path: "employes", component: EmployesComponent },
+      // ➕ Wrapper pour redirection automatique
+      { path: 'job-offers', component: JobOffersWrapperComponent },
+  
+      // 👉 Les vraies routes pour chaque rôle
+      { path: 'job-offers/admin', component: AdminJobOffersComponent },
+      { path: 'job-offers/user', component: JobOffersComponent },
+   
+
+  
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+    ],
+  }
+  ,
+  {
+    path: "auth",
+    component: AuthComponent,
+    children: [
+      { path: "login", component: LoginComponent },
+      { path: "register", component: RegisterComponent },
+      { path: "", redirectTo: "login", pathMatch: "full" },
+    ],
+  },
+  {
+    path: "leave",
+    component: LeaveComponent,
+    children: [
+      { path: "request", component: LeaveRequestComponent },
+      { path: "rh", component: LeaveRHComponent },
+      { path: "", redirectTo: "request", pathMatch: "full" },
+    ],
+  },
+  { path: "profile", component: ProfileComponent },
+  { path: "landing", component: LandingComponent },
+  { path: "", redirectTo: "admin", pathMatch: "full" },
+  { path: "**", redirectTo: "", pathMatch: "full" },
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule],
+})
+export class AppRoutingModule {}
