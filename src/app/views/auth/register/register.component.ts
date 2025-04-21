@@ -19,7 +19,7 @@ export class RegisterComponent implements OnInit {
 
   register() {
     console.log(this.employe);
-    this.http.post('http://localhost:3000/api/employe/signup', this.employe).subscribe({
+    this.http.post('http://localhost:3000/api/auth/signup', this.employe).subscribe({
       next: (res) => {
         console.log('Employé inscrit avec succès', res);
         // 🔒 Enregistrement dans le localStorage

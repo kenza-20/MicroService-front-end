@@ -24,7 +24,7 @@ export class SidebarComponent implements OnInit {
     const token = localStorage.getItem('authToken');
     if (token) {
       const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-      this.http.get<any>('http://localhost:3000/api/employe/bytoken', { headers }).subscribe({
+      this.http.get<any>('http://localhost:8093/api/auth/bytoken', { headers }).subscribe({
         next: (res) => {
           console.log('resss',res)
           this.userRole = res.user.role;

@@ -24,7 +24,7 @@ export class LoginComponent {
   login() {
     const credentials = this.loginForm.value;
     console.log('Credentials:', credentials); // 🐞 vérifie les valeurs
-    this.http.post<any>('http://localhost:3000/api/employe/login', credentials).subscribe({
+    this.http.post<any>('http://localhost:3000/api/auth/login', credentials).subscribe({
       next: (res) => {
         this.saveToken(res.token);
         this.router.navigate(['/user/profile']);
