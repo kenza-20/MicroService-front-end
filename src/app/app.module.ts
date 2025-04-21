@@ -58,9 +58,8 @@ import { LeaveRHComponent } from "./views/leave/rh/leave-rh.component";
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { EmployesComponent } from './views/admin/employes/employes.component';
-import {EmployeListComponent} from "./components/employe/employe-list/employe-list.component";
-import {EmployeAddComponent} from "./components/employe/employe-add/employe-add.component";
-import {EmployeModifyComponent} from "./components/employe/employe-modify/employe-modify.component";
+import { NotificationsComponent } from './views/admin/notifications/notifications.component';
+import { SendNotificationsComponent } from './views/admin/send-notifications/send-notifications.component';
 
 @NgModule({
   declarations: [
@@ -105,9 +104,8 @@ import {EmployeModifyComponent} from "./components/employe/employe-modify/employ
     LeaveRHComponent,
     LeaveComponent,
     EmployesComponent,
-    EmployeListComponent,
-    EmployeAddComponent,
-    EmployeModifyComponent,
+    NotificationsComponent,
+    SendNotificationsComponent,
 
 
   ],
