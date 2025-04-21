@@ -1,0 +1,9 @@
+<h2>Evaluations</h2>
+<button (click)="loadAllEvaluations()">Load All Evaluations</button>
+<button (click)="loadEvaluationsByEmploye(1)">Load Evaluations for Employe 1</button>
+<button (click)="getGrade(1)">Get Grade for Employe 1</button>
+<button (click)="createNewEvaluation()">Create Evaluation</button>
+<ul>
+  <li *ngFor="let eval of evaluations">{{ eval.grade }}</li>
+</ul>
+<p *ngIf="grade !== null">Grade: {{ grade }}</p>

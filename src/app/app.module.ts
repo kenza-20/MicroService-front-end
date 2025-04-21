@@ -61,6 +61,7 @@ import { EmployesComponent } from './views/admin/employes/employes.component';
 import {EmployeListComponent} from "./components/employe/employe-list/employe-list.component";
 import {EmployeAddComponent} from "./components/employe/employe-add/employe-add.component";
 import {EmployeModifyComponent} from "./components/employe/employe-modify/employe-modify.component";
+import { EvaluationComponent } from './components/evaluation/evaluation.component';
 
 @NgModule({
   declarations: [
@@ -108,6 +109,7 @@ import {EmployeModifyComponent} from "./components/employe/employe-modify/employ
     EmployeListComponent,
     EmployeAddComponent,
     EmployeModifyComponent,
+    EvaluationComponent,
 
 
   ],
