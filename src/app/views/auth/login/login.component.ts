@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { AuthService } from 'src/app/services/auth.service';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,26 +11,32 @@ export class LoginComponent {
   loginForm: FormGroup;
 
   constructor(
-    private fb: FormBuilder,
-    private authService: AuthService,
-    private router: Router
+    public fb: FormBuilder,
+    public http: HttpClient,
+    public router: Router
   ) {
     this.loginForm = this.fb.group({
-      username: [''],
+      email: [''],
       password: ['']
     });
   }
 
   login() {
-    this.authService.login(this.loginForm.value).subscribe({
+    const credentials = this.loginForm.value;
+    console.log('Credentials:', credentials); // 🐞 vérifie les valeurs
+    this.http.post<any>('http://localhost:3000/api/employe/login', credentials).subscribe({
       next: (res) => {
-        this.authService.saveToken(res.token); // ✅ stocke le token
-        this.router.navigate(['/admin/job-offers']); // ✅ redirige
+        this.saveToken(res.token);
+        this.router.navigate(['/user/profile']);
       },
       error: (err) => {
         alert('Erreur de connexion');
         console.error(err);
       }
     });
+  }
+
+  saveToken(token: string) {
+    localStorage.setItem('authToken', token);
   }
 }

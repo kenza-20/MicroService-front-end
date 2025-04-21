@@ -1,53 +1,38 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: "app-register",
-  templateUrl: "./register.component.html",
+  selector: 'app-register',
+  templateUrl: './register.component.html',
 })
 export class RegisterComponent implements OnInit {
-  constructor() {}
+  employe = {
+    name: '',
+    email: '',
+    password: '',
+  };
+
+  constructor(private http: HttpClient,private router: Router) {}
 
   ngOnInit(): void {}
+
+  register() {
+    console.log(this.employe);
+    this.http.post('http://localhost:3000/api/employe/signup', this.employe).subscribe({
+      next: (res) => {
+        console.log('Employé inscrit avec succès', res);
+        // 🔒 Enregistrement dans le localStorage
+        localStorage.setItem('employe', JSON.stringify(this.employe));
+        alert('Compte créé !');
+        this.router.navigate(['/auth/login']); // ✅ Redirection ici
+
+      },
+      error: (err) => {
+        console.error('Erreur d\'inscription', err);
+        alert('Erreur lors de la création du compte');
+      },
+    });
+  }
+
 }
-
-
-// const signupUser = async (req, res) => {
-//   const { name, email, password } = req.body;
-
-//   try {
-//       // 🔍 Validation des champs
-//       if (!name  || !email || !password ) {
-//           throw new Error('All fields must be filled');
-//       }
-//       if (!validator.isEmail(email)) {
-//           throw new Error('Email not valid');
-//       }
-//       if (!validator.isStrongPassword(password)) {
-//           throw new Error('Password must be at least 8 characters long, with uppercase, lowercase, number, and symbol');
-//       }
-
-//       // 🔍 Vérification si l'email existe déjà
-//       const exists = await User.findOne({ email });
-//       if (exists) {
-//           throw new Error('Email already in use');
-//       }
-
-//       // 🔑 Hash du mot de passe
-//       const salt = await bcrypt.genSalt(10);
-//       const hash = await bcrypt.hash(password, salt);
-//       const role = 'employe'; 
-
-
-//       // ✅ Création de l'utilisateur
-
-//       const user = await User.create({ name, email, password: hash, role });
-
-//       // 🎟 Génération du Token
-//       const token = createToken(user._id, user.role);
-
-//       res.status(200).json({ name, email, role, token, userId: user._id});
-
-//   } catch (error) {
-//       res.status(400).json({ error: error.message });
-//   }
-// };
